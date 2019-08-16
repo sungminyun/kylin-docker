@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-MAINTAINER Kyligence Inc
+MAINTAINER sungminyun
 
 WORKDIR /tmp
 
@@ -11,7 +11,7 @@ RUN set -x \
 ARG MIRROR=mirror.bit.edu.cn
 
 # Installing Hadoop
-ARG HADOOP_VERSION=2.7.4
+ARG HADOOP_VERSION=2.7.7
 # COPY hadoop-${HADOOP_VERSION}.tar.gz .
 RUN set -x \
     && wget -q http://${MIRROR}/apache/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz \
@@ -22,7 +22,7 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ENV YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 # Installing Spark
-ARG SPARK_VERSION=2.2.1
+ARG SPARK_VERSION=2.4.3
 # COPY spark-${SPARK_VERSION}-bin-without-hadoop.tgz .
 RUN set -x \
     && wget -q http://${MIRROR}/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz \
@@ -32,7 +32,7 @@ ENV SPARK_HOME=/usr/local/spark
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native/:$LD_LIBRARY_PATH
 
 # Installing Hive
-ARG HIVE_VERSION=1.2.2
+ARG HIVE_VERSION=2.3.5
 # COPY apache-hive-${HIVE_VERSION}-bin.tar.gz .
 RUN set -x \
     && wget -q http://${MIRROR}/apache/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz \
@@ -43,7 +43,7 @@ ENV HCAT_HOME=$HIVE_HOME/hcatalog
 ENV HIVE_CONF=$HIVE_HOME/conf
 
 # Installing HBase
-ARG HBASE_VERSION=1.3.1
+ARG HBASE_VERSION=1.4.10
 # COPY hbase-${HBASE_VERSION}-bin.tar.gz .
 RUN set -x \
     && wget -q http://${MIRROR}/apache/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz \
@@ -52,7 +52,7 @@ RUN set -x \
 ENV HBASE_HOME=/usr/local/hbase
 
 # Installing Kylin
-ARG KYLIN_VERSION=2.2.0
+ARG KYLIN_VERSION=2.6.3
 # COPY apache-kylin-${KYLIN_VERSION}-bin-hbase1x.tar.gz .
 RUN set -x \
     && wget -q http://${MIRROR}/apache/kylin/apache-kylin-${KYLIN_VERSION}/apache-kylin-${KYLIN_VERSION}-bin-hbase1x.tar.gz \
